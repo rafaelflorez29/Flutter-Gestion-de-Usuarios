@@ -19,12 +19,18 @@ class _ScreenLoginState extends State<ScreenLogin> {
     final ancho = MediaQuery.of(context).size;
     final TextEditingController _correoController = TextEditingController();
     final TextEditingController _contrasenaController = TextEditingController();
+    final String _errorMensaje = "Contraeña o correo electronico incorecctos";
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 20,
           children: [
+            Container(
+              height: 30,
+              width: ancho.width * 0.9,
+              child: Text(_errorMensaje),
+            ),
             SizedBox(
               width: ancho.width * 0.9,
               child: TextField(
@@ -35,7 +41,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                   hintStyle: TextStyle(color: Colors.white),
                   border: OutlineInputBorder(),
                   filled: true,
-                  fillColor: Colors.black38,
+                  fillColor: Colors.white30,
                 ),
               ),
             ),
@@ -47,11 +53,13 @@ class _ScreenLoginState extends State<ScreenLogin> {
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Colors.black38,
+                  fillColor: Colors.white30,
                   border: OutlineInputBorder(),
                   hintText: "Ingrese su contraseña",
-                  hintStyle: TextStyle(color: Colors.white)
+                  hintStyle: TextStyle(color: Colors.white),
+
                 ),
+
               ),
             ),
             SizedBox(height: 10,),
@@ -60,8 +68,15 @@ class _ScreenLoginState extends State<ScreenLogin> {
                 if(usuario["correo"] == _correoController.text && usuario["contrasena"] == _contrasenaController.text){
                   Navigator.pushNamed(context, "/admin");
                 }
+                _contrasenaController.clear();
+                _correoController.clear();
               }
-            }, child: Text("Iniciar Sesion"),)
+            }, child: Text("Iniciar Sesion"),
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.white30),
+                foregroundColor: WidgetStatePropertyAll(Colors.white)
+              ),
+            ),
           ],
         ),
       ),
